@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import styles from "./dashboard.module.css";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
+import { signOut } from "next-auth/react";
 
 export default function DashboardPage() {
   const [expenses, setExpenses] = useState<any[]>([]);
@@ -26,6 +27,7 @@ export default function DashboardPage() {
   const [showCategoriesModal, setShowCategoriesModal] = useState(false);
   const [newCategory, setNewCategory] = useState("");
   const [currentChart, setCurrentChart] = useState(0);
+  const [error, setError] = useState("");
 
   const COLORS = [
     "#2563eb",
@@ -105,9 +107,7 @@ export default function DashboardPage() {
   async function handleCreateCategory(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (!newCategory.trim()) return;
-
-    await fetch("/api/categories", {
+    const res = await fetch("/api/categories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -117,6 +117,14 @@ export default function DashboardPage() {
       }),
     });
 
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.error);
+      return;
+    }
+
+    setError("");
     setNewCategory("");
 
     await loadCategories();
@@ -189,6 +197,12 @@ export default function DashboardPage() {
     setTitle(expense.title);
     setAmount(expense.amount.toString());
     setCategory(expense.category);
+  }
+
+  function handleLogout() {
+    signOut({
+      callbackUrl: "/login",
+    });
   }
 
   useEffect(() => {
@@ -349,8 +363,10 @@ export default function DashboardPage() {
               year: "numeric",
             })}
           </span>
-          <button>Ayuda</button>
-          <button>Cerrar Sesion</button>
+          <button className={styles["d-help-btn"]}>Ayuda</button>
+          <button onClick={handleLogout} className={styles["d-logout-btn"]}>
+            Cerrar Sesión
+          </button>
         </div>
 
         {showCategoriesModal && (
@@ -393,6 +409,8 @@ export default function DashboardPage() {
                 >
                   Cerrar
                 </button>
+
+                <p className={styles["d-error"]}>{error}</p>
               </form>
             </div>
           </div>

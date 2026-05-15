@@ -53,7 +53,28 @@ export async function POST(req: Request) {
 
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
+    include: {
+      categories: true,
+    },
   });
+
+  if (!user) {
+    return Response.json({ error: "User not found" }, { status: 404 });
+  }
+
+  if (user.categories.length >= 15) {
+    return Response.json(
+      { error: "Solo puedes tener hasta 15 categorías." },
+      { status: 400 }
+    );
+  }
+
+  if (user.categories.some((cat) => cat.name.toLowerCase() === body.name.toLowerCase())) {
+    return Response.json(
+      { error: "Ya tienes una categoría con este nombre." },
+      { status: 400 }
+    );
+  }
 
   const category = await prisma.category.create({
     data: {

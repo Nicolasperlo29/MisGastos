@@ -563,8 +563,47 @@ select.d-input option {
   cursor: pointer;
 }
 
+.d-logout-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.d-logout-btn:hover {
+  background: #b91c1c;
+}
+
+.d-help-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.d-help-btn:hover {
+  background: #1d4ed8;
+}
+
 .d-cancel-btn:hover {
   background: #f8fafc;
+}
+
+.d-error {
+  margin-top: 0.75rem;
+  color: #dc2626 !important;
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 @keyframes fadeIn {
