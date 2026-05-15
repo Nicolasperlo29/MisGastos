@@ -6,6 +6,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import styles from "./dashboard.module.css";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import { signOut } from "next-auth/react";
+import jsPDF from "jspdf";
 
 export default function DashboardPage() {
   const [expenses, setExpenses] = useState<any[]>([]);
@@ -315,6 +316,39 @@ export default function DashboardPage() {
     };
   });
 
+  function exportExpensesPDF() {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Reporte de Gastos", 14, 20);
+
+    let y = 40;
+
+    filteredExpenses.forEach((exp: any, index: number) => {
+      doc.setFontSize(12);
+
+      doc.text(
+        `${index + 1}. ${exp.title} | ${exp.category} | $${exp.amount}`,
+        14,
+        y,
+      );
+
+      y += 10;
+
+      doc.text(new Date(exp.createdAt).toLocaleDateString("es-AR"), 14, y);
+
+      y += 15;
+
+      // nueva página
+      if (y > 270) {
+        doc.addPage();
+        y = 20;
+      }
+    });
+
+    doc.save("gastos.pdf");
+  }
+
   const maxExpense = Math.max(...monthlyData.map((m) => m.total));
 
   return (
@@ -334,7 +368,10 @@ export default function DashboardPage() {
 
             {showConfig && (
               <div className={styles["d-config-dropdown"]}>
-                <button className={styles["d-config-item"]}>
+                <button
+                  className={styles["d-config-item"]}
+                  onClick={exportExpensesPDF}
+                >
                   Exportar gastos
                 </button>
 
