@@ -1,13 +1,13 @@
 .d-root {
   min-height: 100vh;
-  background: #f8f7f4;
+  background: var(--bg);
   font-family: "Instrument Sans", sans-serif;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .d-topbar {
-  background: #fff;
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   padding: 0 2rem;
   height: 56px;
   display: flex;
@@ -20,7 +20,7 @@
 .d-topbar-logo {
   font-family: "Instrument Serif", serif;
   font-size: 1.2rem;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 .d-topbar-logo em {
   font-style: italic;
@@ -28,7 +28,7 @@
 }
 .d-topbar-date {
   font-size: 0.72rem;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .d-body {
@@ -44,7 +44,7 @@
   font-family: "Instrument Serif", serif;
   font-size: clamp(1.75rem, 4vw, 2.4rem);
   font-weight: 400;
-  color: #0f172a;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -54,28 +54,29 @@
 }
 .d-heading p {
   font-size: 0.78rem;
-  color: #94a3b8;
+  color: var(--text-muted);
   margin-top: 0.25rem;
 }
+
 .d-config-wrap {
   position: relative;
 }
 
 .d-config-btn {
-  background: #fff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.55rem 0.9rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: #334155;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .d-config-btn:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--input-bg);
+  border-color: var(--border);
 }
 
 .d-config-dropdown {
@@ -83,10 +84,10 @@
   top: calc(100% + 10px);
   right: 0;
   width: 220px;
-  background: #fff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px var(--shadow-modal);
   padding: 0.4rem;
   z-index: 50;
   animation: fadeIn 0.15s ease;
@@ -103,11 +104,11 @@
   font-size: 0.82rem;
   cursor: pointer;
   transition: background 0.12s;
-  color: #334155;
+  color: var(--text-secondary);
 }
 
 .d-config-item:hover {
-  background: #f8fafc;
+  background: var(--input-bg);
 }
 
 .d-config-itemDanger {
@@ -117,6 +118,7 @@
 .d-config-itemDanger:hover {
   background: #fef2f2;
 }
+
 .d-categories-list {
   display: flex;
   flex-direction: column;
@@ -130,12 +132,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.7rem 0.9rem;
   font-size: 0.85rem;
-  color: #334155;
+  color: var(--text-secondary);
 }
 
 /* STATS */
@@ -143,8 +145,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background: #e2e8f0;
-  border: 1px solid #e2e8f0;
+  background: var(--border);
+  border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 1.5rem;
@@ -155,7 +157,7 @@
   }
 }
 .d-stat {
-  background: #fff;
+  background: var(--surface);
   padding: 1.2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -165,13 +167,13 @@
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #94a3b8;
+  color: var(--text-muted);
   font-weight: 600;
 }
 .d-stat-value {
   font-family: "Instrument Serif", serif;
   font-size: clamp(1.5rem, 3vw, 1.9rem);
-  color: #0f172a;
+  color: var(--text-primary);
   line-height: 1;
 }
 .d-stat-value.blue {
@@ -179,7 +181,7 @@
 }
 .d-stat-sub {
   font-size: 0.68rem;
-  color: #cbd5e1;
+  color: var(--text-faint);
 }
 
 /* COLUMNS */
@@ -200,15 +202,15 @@
 .d-card {
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
   height: 100%;
 }
 .d-card-head {
   padding: 0.875rem 1.25rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -218,11 +220,11 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 .d-badge {
-  background: #f1f5f9;
-  color: #64748b;
+  background: var(--badge-bg);
+  color: var(--badge-color);
   font-size: 0.68rem;
   font-weight: 600;
   padding: 2px 8px;
@@ -251,7 +253,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.78rem;
-  color: #475569;
+  color: var(--text-secondary);
 }
 .d-legend-dot {
   width: 9px;
@@ -264,29 +266,29 @@
 }
 .d-legend-val {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 .d-empty {
   text-align: center;
   padding: 2.5rem 1rem;
-  color: #cbd5e1;
+  color: var(--text-faint);
   font-size: 0.8rem;
 }
 .d-chart-btn {
-  background: #fff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 0.45rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .d-chart-btn:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--input-bg);
+  border-color: var(--border);
 }
 
 /* FORM */
@@ -300,19 +302,19 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: #94a3b8;
+  color: var(--text-muted);
   display: block;
   margin-bottom: 0.3rem;
 }
 .d-input {
   width: 100%;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 0.6rem 0.75rem;
   font-family: "Instrument Sans", sans-serif;
   font-size: 0.875rem;
-  color: #0f172a;
+  color: var(--text-primary);
   outline: none;
   transition:
     border-color 0.15s,
@@ -322,13 +324,14 @@
 .d-input:focus {
   border-color: #93c5fd;
   box-shadow: 0 0 0 3px #dbeafe;
-  background: #fff;
+  background: var(--surface);
 }
 .d-input::placeholder {
-  color: #cbd5e1;
+  color: var(--text-faint);
 }
 select.d-input option {
-  background: #fff;
+  background: var(--surface);
+  color: var(--text-primary);
 }
 .d-btn {
   width: 100%;
@@ -356,7 +359,6 @@ select.d-input option {
 .d-list {
   display: flex;
   flex-direction: column;
-
   max-height: 520px;
   overflow-y: auto;
   scroll-behavior: smooth;
@@ -367,16 +369,16 @@ select.d-input option {
 }
 
 .d-list::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: var(--input-bg);
 }
 
 .d-list::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--border);
   border-radius: 999px;
 }
 
 .d-list::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--text-muted);
 }
 
 .d-list-item {
@@ -384,7 +386,7 @@ select.d-input option {
   align-items: center;
   gap: 0.875rem;
   padding: 0.875rem 1.25rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-subtle);
   transition: background 0.1s;
   animation: fadeUp 0.18s ease both;
 }
@@ -392,7 +394,7 @@ select.d-input option {
   border-bottom: none;
 }
 .d-list-item:hover {
-  background: #f8fafc;
+  background: var(--input-bg);
 }
 
 .d-filters {
@@ -400,15 +402,15 @@ select.d-input option {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1rem;
   padding: 1.25rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-subtle);
   align-items: end;
 }
 
 .d-cancel-btn {
   width: 100%;
-  background: #fff;
-  color: #64748b;
-  border: 1px solid #e2e8f0;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 0.675rem 1rem;
   font-family: "Instrument Sans", sans-serif;
@@ -419,15 +421,15 @@ select.d-input option {
 }
 
 .d-cancel-btn:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--input-bg);
+  border-color: var(--border);
 }
 
 .d-item-icon {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: #f1f5f9;
+  background: var(--input-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -441,7 +443,7 @@ select.d-input option {
 .d-item-title {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -457,14 +459,14 @@ select.d-input option {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 .d-item-sep {
-  color: #e2e8f0;
+  color: var(--border);
 }
 .d-item-date {
   font-size: 0.63rem;
-  color: #cbd5e1;
+  color: var(--text-faint);
 }
 .d-item-right {
   display: flex;
@@ -475,11 +477,11 @@ select.d-input option {
 .d-item-amount {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 .d-del {
   background: none;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 5px;
   width: 28px;
   height: 28px;
@@ -488,7 +490,7 @@ select.d-input option {
   justify-content: center;
   cursor: pointer;
   font-size: 0.7rem;
-  color: #94a3b8;
+  color: var(--text-muted);
   transition: all 0.12s;
   flex-shrink: 0;
 }
@@ -501,7 +503,7 @@ select.d-input option {
 .d-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.45);
+  background: var(--overlay-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -513,23 +515,23 @@ select.d-input option {
 .d-modal {
   width: 100%;
   max-width: 380px;
-  background: #fff;
+  background: var(--surface);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px var(--shadow-modal);
   animation: modalUp 0.18s ease;
 }
 
 .d-modal h3 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .d-modal p {
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
@@ -552,15 +554,6 @@ select.d-input option {
 
 .d-confirm-btn:hover {
   background: #b91c1c;
-}
-
-.d-cancel-btn {
-  flex: 1;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 0.7rem;
-  cursor: pointer;
 }
 
 .d-logout-btn {
@@ -593,10 +586,6 @@ select.d-input option {
 
 .d-help-btn:hover {
   background: #1d4ed8;
-}
-
-.d-cancel-btn:hover {
-  background: #f8fafc;
 }
 
 .d-error {

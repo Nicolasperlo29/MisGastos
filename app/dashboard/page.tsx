@@ -29,6 +29,18 @@ export default function DashboardPage() {
   const [newCategory, setNewCategory] = useState("");
   const [currentChart, setCurrentChart] = useState(0);
   const [error, setError] = useState("");
+  const [isDark, setIsDark] = useState(false);
+
+  function handleThemeToggle() {
+    setIsDark((prev) => {
+      const next = !prev;
+      document.documentElement.setAttribute(
+        "data-theme",
+        next ? "dark" : "light",
+      );
+      return next;
+    });
+  }
 
   const COLORS = [
     "#2563eb",
@@ -316,6 +328,14 @@ export default function DashboardPage() {
     };
   });
 
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark") {
+      setIsDark(true);
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  }, []);
+
   function exportExpensesPDF() {
     const doc = new jsPDF();
 
@@ -375,8 +395,11 @@ export default function DashboardPage() {
                   Exportar gastos
                 </button>
 
-                <button className={styles["d-config-item"]}>
-                  Cambiar tema
+                <button
+                  className={styles["d-config-item"]}
+                  onClick={handleThemeToggle}
+                >
+                  {isDark ? "☀️ Tema claro" : "🌙 Tema oscuro"}
                 </button>
 
                 <button
