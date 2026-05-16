@@ -7,6 +7,7 @@ import styles from "./dashboard.module.css";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import { signOut } from "next-auth/react";
 import jsPDF from "jspdf";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const [expenses, setExpenses] = useState<any[]>([]);
@@ -423,7 +424,11 @@ export default function DashboardPage() {
               year: "numeric",
             })}
           </span>
-          <button className={styles["d-help-btn"]}>Ayuda</button>
+          <Link href="/help">
+            <button className={styles["d-help-btn"]}>
+              Ayuda
+            </button>
+          </Link>
           <button onClick={handleLogout} className={styles["d-logout-btn"]}>
             Cerrar Sesión
           </button>
