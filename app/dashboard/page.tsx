@@ -406,7 +406,30 @@ export default function DashboardPage() {
               </button>
               {showConfig && (
                 <div className={styles["d-config-dropdown"]}>
-                  {/* igual que antes */}
+                  <button
+                    className={styles["d-config-item"]}
+                    onClick={exportExpensesPDF}
+                  >
+                    Exportar gastos
+                  </button>
+
+                  <button
+                    className={styles["d-config-item"]}
+                    onClick={handleThemeToggle}
+                  >
+                    {isDark ? "☀️ Tema claro" : "🌙 Tema oscuro"}
+                  </button>
+
+                  <button
+                    className={styles["d-config-item"]}
+                    onClick={openCategoriesModal}
+                  >
+                    Categorías
+                  </button>
+
+                  <button className={styles["d-config-itemDanger"]}>
+                    Reiniciar datos
+                  </button>
                 </div>
               )}
             </div>
