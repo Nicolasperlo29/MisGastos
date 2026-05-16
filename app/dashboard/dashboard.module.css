@@ -10,13 +10,14 @@
   border-bottom: 1px solid var(--border);
   padding: 0 2rem;
   height: 56px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 10;
 }
+
 .d-topbar-logo {
   font-family: "Instrument Serif", serif;
   font-size: 1.2rem;
@@ -29,6 +30,13 @@
 .d-topbar-date {
   font-size: 0.72rem;
   color: var(--text-muted);
+  text-align: center;
+  text-transform: capitalize;
+}
+.d-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .d-body {
@@ -555,37 +563,42 @@ select.d-input option {
 .d-confirm-btn:hover {
   background: #b91c1c;
 }
-
 .d-logout-btn {
-  background: #dc2626;
-  color: white;
-  border: none;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 0.45rem 0.75rem;
+  padding: 0.4rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: all 0.15s;
 }
-
 .d-logout-btn:hover {
-  background: #b91c1c;
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
 }
 
-.d-help-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.45rem 0.75rem;
+.d-help-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
   font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.15s;
 }
-
-.d-help-btn:hover {
-  background: #1d4ed8;
+.d-help-icon:hover {
+  border-color: #93c5fd;
+  color: #2563eb;
+  background: #eff6ff;
 }
 
 .d-error {
