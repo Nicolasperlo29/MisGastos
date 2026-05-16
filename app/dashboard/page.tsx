@@ -425,9 +425,7 @@ export default function DashboardPage() {
             })}
           </span>
           <Link href="/help">
-            <button className={styles["d-help-btn"]}>
-              Ayuda
-            </button>
+            <button className={styles["d-help-btn"]}>Ayuda</button>
           </Link>
           <button onClick={handleLogout} className={styles["d-logout-btn"]}>
             Cerrar Sesión
