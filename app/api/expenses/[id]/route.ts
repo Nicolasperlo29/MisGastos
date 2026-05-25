@@ -53,7 +53,7 @@ export async function DELETE(
   return Response.json({ success: true });
 }
 
-export async function PUT(req: Request, context: { params: { id: string } }) {
+export async function PUT(req: Request, context: { params: Promise<{ id: string }> }) {
   
   const { id } = await context.params;
   const body = await req.json();
