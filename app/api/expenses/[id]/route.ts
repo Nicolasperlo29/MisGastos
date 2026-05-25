@@ -102,24 +102,11 @@ export async function PUT(req: Request, context: { params: Promise<{ id: string 
     );
   }
 
-  await prisma.expense.update({
-    where: {
-      id,
-    },
-    data: {
-      title: body.title,
-      amount: body.amount,
-      date: body.date,
-      category: body.category,
-    },
-  });
-
   const updatedExpense = await prisma.expense.update({
     where: { id },
     data: {
       title: body.title,
       amount: body.amount,
-      date: body.date,
       category: body.category,
     },
   });
