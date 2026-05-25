@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function LoginForm() {
+  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -11,12 +12,24 @@ export default function LoginForm() {
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
-    await signIn("credentials", {
+    setError("");
+
+    const res = await signIn("credentials", {
       email,
       password,
-      callbackUrl: "/dashboard",
+      redirect: false,
     });
+
     setIsLoading(false);
+
+    if (res?.error) {
+      setError("Email o contraseña incorrectos");
+      return;
+    }
+
+    if (res?.ok) {
+      window.location.href = "/dashboard";
+    }
   }
 
   return (
@@ -204,6 +217,10 @@ export default function LoginForm() {
               <button className="auth-btn" type="submit" disabled={isLoading}>
                 {isLoading ? "Ingresando..." : "Ingresar"}
               </button>
+
+              {error && (
+                <p style={{ color: "red", fontSize: "0.85rem" }}>{error}</p>
+              )}
             </form>
 
             <div className="auth-footer">
