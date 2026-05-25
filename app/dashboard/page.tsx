@@ -12,7 +12,7 @@ import Link from "next/link";
 export default function DashboardPage() {
   const [expenses, setExpenses] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
-  const [chartData, setChartData] = useState<any[]>([]);
+  // const [chartData, setChartData] = useState<any[]>([]);
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
@@ -64,16 +64,16 @@ export default function DashboardPage() {
     const res = await fetch("/api/categories");
     setCategories(await res.json());
   }
-  async function loadChartData() {
-    const res = await fetch("/api/expenses/categories");
-    setChartData(await res.json());
-  }
+  // async function loadChartData() {
+  //   const res = await fetch("/api/expenses/categories");
+  //   setChartData(await res.json());
+  // }
 
   async function deleteExpense(id: string) {
     await fetch(`/api/expenses/${id}`, { method: "DELETE" });
     loadExpenses();
     loadSummary();
-    loadChartData();
+    // loadChartData();
   }
 
   async function updateExpense(id: string) {
@@ -90,7 +90,7 @@ export default function DashboardPage() {
     });
     loadExpenses();
     loadSummary();
-    loadChartData();
+    // loadChartData();
   }
 
   function cancelEdit() {
@@ -115,11 +115,20 @@ export default function DashboardPage() {
     setShowDeleteModal(false);
     setDeleteId(null);
 
-    await Promise.all([loadExpenses(), loadSummary(), loadChartData()]);
+    await Promise.all([loadExpenses(), loadSummary()]);
   }
 
   async function handleCreateCategory(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (
+      categories.some(
+        (cat) => cat.name.toLowerCase() === newCategory.trim().toLowerCase(),
+      )
+    ) {
+      setError("La categoría ya existe");
+      return;
+    }
 
     const res = await fetch("/api/categories", {
       method: "POST",
@@ -166,6 +175,17 @@ export default function DashboardPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (Number(amount) > 10000000) {
+      alert("El monto no puede ser mayor a 10000000");
+      return;
+    }
+
+    if (title.length > 25) {
+      alert("La descripción no puede superar los 25 caracteres");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const body = {
@@ -200,7 +220,7 @@ export default function DashboardPage() {
     setCategory("");
     setEditingId(null);
 
-    await Promise.all([loadExpenses(), loadSummary(), loadChartData()]);
+    await Promise.all([loadExpenses(), loadSummary()]);
 
     setIsSubmitting(false);
   }
@@ -223,7 +243,7 @@ export default function DashboardPage() {
     loadExpenses();
     loadSummary();
     loadCategories();
-    loadChartData();
+    // loadChartData();
   }, []);
 
   function handleConfigClick() {
@@ -298,6 +318,23 @@ export default function DashboardPage() {
 
     return true;
   });
+
+  const chartData = Object.values(
+    filteredExpenses.reduce((acc: any, exp: any) => {
+      const category = exp.category || "Sin categoría";
+
+      if (!acc[category]) {
+        acc[category] = {
+          category,
+          value: 0,
+        };
+      }
+
+      acc[category].value += Number(exp.amount);
+
+      return acc;
+    }, {}),
+  );
 
   const monthlyData = Array.from({ length: 12 }, (_, i) => {
     const monthNames = [
@@ -468,6 +505,7 @@ export default function DashboardPage() {
                   className={styles["d-input"]}
                   placeholder="Nueva categoría"
                   value={newCategory}
+                  maxLength={25}
                   onChange={(e) => setNewCategory(e.target.value)}
                 />
 
@@ -723,6 +761,7 @@ export default function DashboardPage() {
                       placeholder="ej. almuerzo, nafta..."
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
+                      maxLength={25}
                       required
                     />
                   </div>
@@ -753,6 +792,7 @@ export default function DashboardPage() {
                       placeholder="0.00"
                       type="number"
                       min="0"
+                      max="10000000"
                       step="0.01"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
