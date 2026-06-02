@@ -375,6 +375,11 @@ export default function DashboardPage() {
   }, []);
 
   function exportExpensesPDF() {
+    if (filteredExpenses.length === 0) {
+      alert("No hay gastos para exportar");
+      return;
+    }
+
     const doc = new jsPDF();
 
     doc.setFontSize(18);
@@ -446,6 +451,7 @@ export default function DashboardPage() {
                   <button
                     className={styles["d-config-item"]}
                     onClick={exportExpensesPDF}
+                    disabled={filteredExpenses.length === 0}
                   >
                     Exportar gastos
                   </button>

@@ -127,6 +127,11 @@
   background: #fef2f2;
 }
 
+.d-config-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .d-categories-list {
   display: flex;
   flex-direction: column;
